@@ -1,0 +1,6 @@
+rootProject.name = 'multi'
+include 'interface'
+include 'admin'
+include 'service'
+include 'repository'
+

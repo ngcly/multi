@@ -28,7 +28,7 @@
         </div>
         <div class="layui-form-item form_code">
             <input class="layui-input" name="randomcode" placeholder="验证码" lay-verify="required" type="text" autocomplete="off" />
-            <div class="code"><img src="/user/kaptcha" onclick="random(this)" width="116" height="36" title="看不清,点击换一张" /></div>
+            <div class="code"><img src="/admin/kaptcha" onclick="random(this)" width="116" height="36" title="看不清,点击换一张" /></div>
         </div>
         <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
     </form>
@@ -56,7 +56,7 @@
         top.location.href = location.href;
     //获取验证码
     function random(tmp){
-        tmp.src="/user/kaptcha?_"+Date.now();
+        tmp.src="/admin/kaptcha?_"+Date.now();
     }
 </script>
 </body>

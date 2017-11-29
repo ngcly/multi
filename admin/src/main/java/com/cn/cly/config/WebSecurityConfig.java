@@ -31,14 +31,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user/validateCode","/user/kaptcha").permitAll()
+                .antMatchers("/admin/validateCode","/admin/kaptcha").permitAll()
 //                .antMatchers("/admin/**").hasRole("ADMIN")  //该URL只有ADMIN权限才可访问
 //                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')") //该URL需具备设定的两个权限才可访问
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/user/login")//设置默认登录成功跳转页面
-                .defaultSuccessUrl("/user/home").failureUrl("/user/login").permitAll()
+                .loginPage("/admin/login")//设置默认登录成功跳转页面
+                .defaultSuccessUrl("/admin/home").failureUrl("/admin/login").permitAll()
                 .and()
                 //开启cookie保存用户数据
                 .rememberMe()
@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //默认注销行为为logout，可以通过下面的方式来修改
 //                .logoutUrl("/logout")
                 //设置注销成功后跳转页面，默认是跳转到登录页面
-                .logoutSuccessUrl("/user/login")
+                .logoutSuccessUrl("/admin/login")
                 .invalidateHttpSession(true)
                 .deleteCookies("token")
                 .permitAll()

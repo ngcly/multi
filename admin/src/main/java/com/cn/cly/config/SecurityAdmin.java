@@ -1,7 +1,7 @@
 package com.cn.cly.config;
 
+import com.cn.cly.entity.Admin;
 import com.cn.cly.entity.Role;
-import com.cn.cly.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,17 +13,17 @@ import java.util.Set;
 /**
  * Created by chen on 2017/6/23.
  */
-public class SecurityUser extends User implements UserDetails{
+public class SecurityAdmin extends Admin implements UserDetails{
     private static final long serialVersionUID = 1L;
-    public SecurityUser(User user) {
-        if(user != null)
+    public SecurityAdmin(Admin admin) {
+        if(admin != null)
         {
-            this.setId(user.getId());
-            this.setUsername(user.getUsername());
-            this.setRealName(user.getRealName());
-            this.setPassword(user.getPassword());
-            this.setSex(user.getSex());
-            this.setRoleList(user.getRoleList());
+            this.setId(admin.getId());
+            this.setUsername(admin.getUsername());
+            this.setRealName(admin.getRealName());
+            this.setPassword(admin.getPassword());
+            this.setSex(admin.getSex());
+            this.setRoleList(admin.getRoleList());
         }
     }
 

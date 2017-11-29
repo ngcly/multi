@@ -31,6 +31,12 @@ public class Role implements Serializable {
     @JoinTable(name="user_role",joinColumns={@JoinColumn(name="role_id")},inverseJoinColumns={@JoinColumn(name="user_id")})
     private List<User> userInfos;// 一个角色对应多个用户
 
+    // 管理员 - 角色关系定义;
+    @ManyToMany
+    @JoinTable(name="admin_role",joinColumns={@JoinColumn(name="role_id")},inverseJoinColumns={@JoinColumn(name="admin_id")})
+    // 一个角色对应多个用户
+    private List<Admin> admins;
+
     //角色 -- 权限关系：多对多关系;
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="role_permission",joinColumns={@JoinColumn(name="role_id")},inverseJoinColumns={@JoinColumn(name="permission_id")})

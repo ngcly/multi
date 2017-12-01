@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 登录验证过滤
  * Created by chen on 2017/8/9.
  */
 public class CustomerAuthenticationFilter extends UsernamePasswordAuthenticationFilter {

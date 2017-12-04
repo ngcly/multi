@@ -19,4 +19,13 @@ public class HomeController {
         return "index";
     }
 
+    /**
+     * 登录页面
+     * @return login.html
+     */
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+
 }

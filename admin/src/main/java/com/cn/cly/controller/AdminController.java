@@ -6,7 +6,6 @@ import com.cn.cly.dao.AdminRepository;
 import com.cn.cly.entity.Admin;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,9 +15,15 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
+/**
+ * 管理员Controller
+ * @author cly
+ * @date 2017-12-04 10:08:00
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -26,20 +31,13 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     AdminRepository adminRepository;
-
     @Autowired
     DefaultKaptcha defaultKaptcha;
 
-    @RequestMapping("/login")
-    public String login(){
-//        Admin admin = adminService.findUserByName("admin").get();
-//        BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);//将密码加密
-//        admin.setPassword(bc.encode("123456"));
-//        adminRepository.save(admin);
-        return "login";
-    }
-
-    //  @PreAuthorize("hasAuthority()") //方法调用前判断是否有权限
+    // 这两个底层实现一样  唯一区别就是hasRole默认添加 ROLE_ 前缀
+//  @PreAuthorize("hasAuthority('ROLE_admin')")
+//  @PreAuthorize("hasRole('admin')") 方法调用前判断是否有权限
+//  @PreAuthorize("hasPermission('','sys:user')") 判断自定义权限标识符
 //  @PostAuthorize("returnObject.id%2==0") 方法调用完后判断 若为false则无权限  基本用不上
 //  @PostFilter("filterObject.id%2==0") 对返回结果进行过滤  filterObject内置为返回对象
 //  @PreFilter(filterTarget="ids", value="filterObject%2==0") 对方法参数进行过滤 如有多参则指定参数 ids为其中一个参数
@@ -47,14 +45,21 @@ public class AdminController {
     public String index(){
         //获取当前用户
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name;
         if (principal instanceof SecurityAdmin) {
-            String username = ((SecurityAdmin)principal).getUsername();
+            name = ((SecurityAdmin)principal).getUsername();
         } else {
-            String username = principal.toString();
+            name = principal.toString();
         }
         return "index";
     }
 
+    /**
+     * kaptcha 验证码
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping("/kaptcha")
     public void defaultKaptcha(HttpServletRequest request, HttpServletResponse response) throws Exception{
         byte[] captchaChallengeAsJpeg;
@@ -84,14 +89,19 @@ public class AdminController {
         responseOutputStream.close();
     }
 
-
-    @RequestMapping("hehe")
-    // 这两个底层实现一样  唯一区别就是hasRole默认添加 ROLE_ 前缀
-//    @PreAuthorize("hasAuthority('ROLE_admin')")
-//    @PreAuthorize("hasRole('admin')")
-    @PreAuthorize("hasPermission('','sys:user')")
-    public String test(){
-        return "heh";
+    /**
+     * 注册
+     * @param admin
+     * @return
+     */
+    @RequestMapping("/register")
+    public String register(@Valid Admin admin){
+//        Admin admin1 = adminService.findUserByName(admin.getUsername()).get();
+        //将密码加密
+        BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
+        admin.setPassword(bc.encode(admin.getPassword()));
+        adminRepository.save(admin);
+        return "login";
     }
 
 }

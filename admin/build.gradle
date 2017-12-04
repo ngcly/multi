@@ -11,7 +11,8 @@ dependencies {
     compile project(":service")
     //后台模板jar包
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.8.RELEASE'
-
+    compile('net.sourceforge.nekohtml:nekohtml:1.9.22')
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 // 以下打包方式已弃用  利用spring-boot 插件 用命令进入到当前目录执行 gradle bootRepackage 打包

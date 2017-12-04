@@ -37,8 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/admin/login")//设置默认登录成功跳转页面
-                .defaultSuccessUrl("/admin/home").failureUrl("/admin/login").permitAll()
+                .loginPage("/login")
+//                .defaultSuccessUrl("/").failureUrl("/login")
+                .permitAll()
                 .and()
                 //开启cookie保存用户数据
                 .rememberMe()
@@ -51,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //默认注销行为为logout，可以通过下面的方式来修改
 //                .logoutUrl("/logout")
                 //设置注销成功后跳转页面，默认是跳转到登录页面
-                .logoutSuccessUrl("/admin/login")
+                .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
                 .deleteCookies("token")
                 .permitAll()

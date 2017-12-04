@@ -5,7 +5,7 @@ version '1.0-SNAPSHOT'
 
 buildscript { //构建脚本
     //定义版本号
-    ext { springBootVersion = '1.5.8.RELEASE' }
+    ext { springBootVersion = '1.5.9.RELEASE' }
     repositories { mavenCentral() } //jar包仓库   使用maven中心库
     dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") }
 }
@@ -26,7 +26,7 @@ subprojects {  //子项目通配
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-//    bootRepackage {  //springboot 指定主启动类 单启动类时
+//    bootRepackage {  //springboot 打包主类 单启动类时
 //        mainClass = 'AdminApplication'
 //    }
 

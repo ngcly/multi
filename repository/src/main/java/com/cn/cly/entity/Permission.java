@@ -25,6 +25,7 @@ public class Permission implements Serializable {
     private Long parentId; //父编号
     private String parentIds; //父编号列表
     private Boolean available = Boolean.FALSE;
+    private Integer sort; //排序
     @ManyToMany
     @JoinTable(name="role_permission",joinColumns={@JoinColumn(name="permission_id")},inverseJoinColumns={@JoinColumn(name="role_id")})
     private List<Role> roles;
@@ -33,7 +34,7 @@ public class Permission implements Serializable {
     public long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,6 +93,14 @@ public class Permission implements Serializable {
     }
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     @Override

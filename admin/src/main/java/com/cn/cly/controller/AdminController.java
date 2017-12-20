@@ -1,14 +1,13 @@
 package com.cn.cly.controller;
 
 import com.cn.cly.AdminService;
-import com.cn.cly.config.SecurityAdmin;
 import com.cn.cly.dao.AdminRepository;
 import com.cn.cly.entity.Admin;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.imageio.ImageIO;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.security.Principal;
 
 /**
  * 管理员Controller
@@ -42,15 +42,16 @@ public class AdminController {
 //  @PostFilter("filterObject.id%2==0") 对返回结果进行过滤  filterObject内置为返回对象
 //  @PreFilter(filterTarget="ids", value="filterObject%2==0") 对方法参数进行过滤 如有多参则指定参数 ids为其中一个参数
     @RequestMapping("/home")
-    public String index(){
+    public String index(Principal principal,Model model){
         //获取当前用户
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String name;
-        if (principal instanceof SecurityAdmin) {
-            name = ((SecurityAdmin)principal).getUsername();
-        } else {
-            name = principal.toString();
-        }
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(principal.getName());
+//        String name;
+//        if (principal instanceof SecurityAdmin) {
+//            name = ((SecurityAdmin)principal).getUsername();
+//        } else {
+//            name = principal.toString();
+//        }
         return "index";
     }
 
@@ -102,6 +103,11 @@ public class AdminController {
         admin.setPassword(bc.encode(admin.getPassword()));
         adminRepository.save(admin);
         return "login";
+    }
+
+    @RequestMapping("/list")
+    public String UserList(){
+        return "user/index";
     }
 
 }

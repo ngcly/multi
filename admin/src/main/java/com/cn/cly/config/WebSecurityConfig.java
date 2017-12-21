@@ -25,7 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/layui/**","/js/**","/css/**","/img/**","/media/**","/**/favicon.ico"); //忽略静态文件 也可以在下面忽略
+        //忽略静态文件 也可以在下面忽略
+        web.ignoring().antMatchers("/layui/**","/js/**","/css/**","/img/**","/media/**","/**/favicon.ico");
     }
 
     @Override
@@ -60,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                 .tokenValiditySeconds(1209600);
         //设置可以iframe访问
-//        http.headers().frameOptions().sameOrigin();
+        http.headers().frameOptions().sameOrigin();
     }
 
 

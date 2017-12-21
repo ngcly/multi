@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -97,11 +98,13 @@ public class AdminController {
      */
     @RequestMapping("/register")
     public String register(@Valid Admin admin){
-//        Admin admin1 = adminService.findUserByName(admin.getUsername()).get();
-        //将密码加密
-        BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
-        admin.setPassword(bc.encode(admin.getPassword()));
-        adminRepository.save(admin);
+        Admin admin1 = adminService.findUserByName(admin.getUsername()).get();
+        if(admin1!=null){
+            //将密码加密
+            BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
+            admin.setPassword(bc.encode(admin.getPassword()));
+            adminRepository.save(admin);
+        }
         return "login";
     }
 

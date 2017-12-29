@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:include="head">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>会员列表页</title>
 </head>
 <body>
-哈喽哈哈了
-
-<p>sadfgwqed</p>
-<p>sadfgwqed</p>
-<p>sadfgwqed</p>
-<p>sadfgwqed</p><p>sadfgwqed</p>
-<p>sadfgwqed</p>
-<p>sadfgwqed</p>
-<p>sadfgwqed</p><p>sadfgwqed</p>
-
-
+<textarea id="demo" style="display: none;"></textarea>
+<script>
+    layui.use('layedit', function(){
+        var layedit = layui.layedit;
+        layedit.build('demo'); //建立编辑器
+    });
+</script>
 </body>
 </html>

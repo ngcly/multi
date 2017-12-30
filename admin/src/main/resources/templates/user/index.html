@@ -11,7 +11,17 @@
 <script>
     layui.use('layedit', function(){
         var layedit = layui.layedit;
-        layedit.build('demo'); //建立编辑器
+        layedit.set({
+            uploadImage: {
+                url: '' //接口url
+                ,type: '' //默认post
+            }
+        });
+//注意：layedit.set 一定要放在 build 前面，否则配置全局接口将无效。
+        layedit.build('demo',{
+            height: 500, //设置编辑器高度
+            uploadImage: {url: '/upload/', type: 'post'}
+        }); //建立编辑器
     });
 </script>
 </body>

@@ -38,3 +38,5 @@ repository/src/test/
 service/build/
 service/out/
 service/src/test/
+/.idea/
+/build/

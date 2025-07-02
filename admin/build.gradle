@@ -4,6 +4,7 @@ plugins {
 
 ext {
     set('swaggerVersion', "2.8.9")
+    set('htmxVersion', "4.0.1")
 }
 
 dependencies {
@@ -13,6 +14,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'io.github.wimdeblauwe:htmx-spring-boot-thymeleaf:4.0.1'
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${swaggerVersion}"
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

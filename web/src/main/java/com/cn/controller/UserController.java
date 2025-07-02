@@ -7,6 +7,7 @@ import com.cn.model.request.LoginRequest;
 import com.cn.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,8 +45,8 @@ public class UserController {
     }
 
     @PostMapping("/list")
-    public Page<UserInfo> getUserList(@RequestBody BasePageRequest pageRequest) {
-        return userService.getUsers(pageRequest);
+    public Page<UserInfo> fetchUserList(@RequestBody BasePageRequest pageRequest) {
+        return userService.findUsers(pageRequest.getPageRequest(PageRequest::of));
     }
 }
 

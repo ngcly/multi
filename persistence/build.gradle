@@ -1,5 +1,5 @@
 dependencies {
     implementation project(":shared")
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    api 'org.springframework.boot:spring-boot-starter-data-jdbc'
     runtimeOnly 'com.h2database:h2'
 }

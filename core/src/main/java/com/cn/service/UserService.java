@@ -1,16 +1,21 @@
 package com.cn.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.cn.dao.UserRepository;
+import com.cn.entity.UserEntity;
 import com.cn.model.UserInfo;
-import com.cn.model.request.BasePageRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * @author LinChen
@@ -35,8 +40,8 @@ public class UserService implements UserDetailsService {
         ).orElseThrow();
     }
 
-    public Page<UserInfo> getUsers(BasePageRequest pageRequest) {
-        PageRequest pageable = pageRequest.getPageRequest(PageRequest::of);
+    @Transactional(readOnly = true)
+    public Page<UserInfo> findUsers(Pageable pageable) {
         return userRepository.findAll(pageable)
                 .map(userEntity -> {
                     UserInfo userInfo = new UserInfo();
@@ -46,7 +51,44 @@ public class UserService implements UserDetailsService {
                     userInfo.setLastName(userEntity.getLastName());
                     userInfo.setEmail(userEntity.getEmail());
                     userInfo.setPhone(userEntity.getPhone());
+                    userInfo.setCreatedAt(userEntity.getCreatedAt());
                     return userInfo;
                 });
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<UserInfo> findById(Long id) {
+        return userRepository.findById(id).map(userEntity -> {
+            UserInfo userInfo = new UserInfo();
+            BeanUtils.copyProperties(userEntity, userInfo);
+            return userInfo;
+        });
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public UserInfo saveUserInfo(UserInfo user) {
+        UserEntity userEntity = BeanUtil.copyProperties(user, UserEntity.class);
+        userRepository.save(userEntity);
+        BeanUtils.copyProperties(userEntity, user);
+        return user;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public boolean isUsernameExists(String username, Long excludeId) {
+        if (excludeId != null) {
+            return userRepository.existsByUsernameAndIdNot(username, excludeId);
+        }
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean isEmailExists(String email, Long excludeId) {
+        if (excludeId != null) {
+            return userRepository.existsByEmailAndIdNot(email, excludeId);
+        }
+        return userRepository.existsByEmail(email);
     }
 }

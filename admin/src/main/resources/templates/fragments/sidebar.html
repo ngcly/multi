@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="sidebar">
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/admin/}"
+         th:classappend="${currentPath == '/admin/' ? 'active' : ''}">
+        <i class="bi bi-house"></i> 首页
+      </a>
+    </li>
+
+    <!-- 用户管理 -->
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/admin/users}"
+         th:classappend="${#strings.startsWith(currentPath, '/admin/users') ? 'active' : ''}">
+        <i class="bi bi-people"></i> 用户管理
+      </a>
+    </li>
+
+    <!-- 系统管理 -->
+    <li class="nav-item">
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>系统管理</span>
+      </h6>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#"
+         th:classappend="${#strings.startsWith(currentPath, '/admin/settings') ? 'active' : ''}">
+        <i class="bi bi-gear"></i> 系统设置
+        <span class="badge bg-secondary ms-auto">即将上线</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#"
+         th:classappend="${#strings.startsWith(currentPath, '/admin/logs') ? 'active' : ''}">
+        <i class="bi bi-file-text"></i> 日志管理
+        <span class="badge bg-secondary ms-auto">即将上线</span>
+      </a>
+    </li>
+
+    <!-- 数据分析 -->
+    <li class="nav-item">
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>数据分析</span>
+      </h6>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#"
+         th:classappend="${#strings.startsWith(currentPath, '/admin/reports') ? 'active' : ''}">
+        <i class="bi bi-graph-up"></i> 数据报表
+        <span class="badge bg-secondary ms-auto">即将上线</span>
+      </a>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

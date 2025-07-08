@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -67,7 +68,14 @@ public class UserService implements UserDetailsService {
 
     @Transactional(rollbackFor = Exception.class)
     public UserInfo saveUserInfo(UserInfo user) {
-        UserEntity userEntity = BeanUtil.copyProperties(user, UserEntity.class);
+        UserEntity userEntity;
+        if(Objects.nonNull(user.getId())) {
+            userEntity = userRepository.findById(user.getId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+        } else {
+            userEntity = new UserEntity();
+        }
+        BeanUtil.copyProperties(user, userEntity);
         userRepository.save(userEntity);
         BeanUtils.copyProperties(userEntity, user);
         return user;

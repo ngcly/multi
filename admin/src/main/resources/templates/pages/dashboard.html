@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+
+<div layout:fragment="content">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">仪表盘</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card bg-primary text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h4 class="card-title">用户管理</h4>
+              <p class="card-text">管理系统用户</p>
+            </div>
+            <div class="align-self-center">
+              <i class="bi bi-people fs-1"></i>
+            </div>
+          </div>
+          <a th:href="@{/admin/users}" class="btn btn-light btn-sm mt-2">
+            查看详情 <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card bg-success text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h4 class="card-title">系统设置</h4>
+              <p class="card-text">配置系统参数</p>
+            </div>
+            <div class="align-self-center">
+              <i class="bi bi-gear fs-1"></i>
+            </div>
+          </div>
+          <button class="btn btn-light btn-sm mt-2" disabled>
+            即将上线 <i class="bi bi-hourglass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h4 class="card-title">数据报表</h4>
+              <p class="card-text">查看数据统计</p>
+            </div>
+            <div class="align-self-center">
+              <i class="bi bi-graph-up fs-1"></i>
+            </div>
+          </div>
+          <button class="btn btn-light btn-sm mt-2" disabled>
+            即将上线 <i class="bi bi-hourglass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card bg-warning text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h4 class="card-title">日志管理</h4>
+              <p class="card-text">查看系统日志</p>
+            </div>
+            <div class="align-self-center">
+              <i class="bi bi-file-text fs-1"></i>
+            </div>
+          </div>
+          <button class="btn btn-light btn-sm mt-2" disabled>
+            即将上线 <i class="bi bi-hourglass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">欢迎使用管理后台</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">这是一个基于 Spring Boot + Thymeleaf + HTMX 构建的管理后台系统。</p>
+          <h6>功能特点：</h6>
+          <ul>
+            <li>响应式设计，支持移动端访问</li>
+            <li>使用 HTMX 实现无刷新页面更新</li>
+            <li>完整的 CRUD 操作示例</li>
+            <li>数据验证和错误处理</li>
+            <li>分页和排序功能</li>
+            <li>实时搜索功能</li>
+            <li>统一的布局和导航系统</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

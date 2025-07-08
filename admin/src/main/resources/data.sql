@@ -1,6 +1,6 @@
 INSERT INTO user_info(username, password, first_name, last_name, birthday, email, phone, address, created_by, updated_by,
                  created_at, updated_at, version)
-VALUES ('niudaye', '{bcrypt}$2a$10$OL4Dwel48yLEKBqKN8cUEeNcPxCZ1fSTNHtNqaE6xrzTySIarYaT2', 'Jerry', 'Gun', '1993-01-02', '234234@qq.com', '34534522', 'New york', 'Lin', 'Lin',
+VALUES ('hehe', '{bcrypt}$2a$10$OL4Dwel48yLEKBqKN8cUEeNcPxCZ1fSTNHtNqaE6xrzTySIarYaT2', 'Jerry', 'Gun', '1993-01-02', '234234@qq.com', '34534522', 'New york', 'Lin', 'Lin',
         parsedatetime('2022-08-01 14:23:13', 'yyyy-MM-dd HH:mm:ss'),
         parsedatetime('2022-08-01 14:23:24', 'yyyy-MM-dd HH:mm:ss'), 0),
        ('jexika', '{bcrypt}$2a$10$OL4Dwel48yLEKBqKN8cUEeNcPxCZ1fSTNHtNqaE6xrzTySIarYaT2', 'Lisa', 'Wan', '2000-01-11', '3423@qq.com', '3452345234', 'None', 'Admin', 'Admin',

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+
+<div layout:fragment="content">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">用户管理</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <a th:href="@{/admin/users/new}" class="btn btn-primary">
+        <i class="bi bi-plus"></i> 新增用户
+      </a>
+    </div>
+  </div>
+
+  <!-- 搜索表单 -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <form hx-get="/admin/users" hx-target="#user-table" hx-trigger="submit, keyup delay:500ms from:input[name='keyword']">
+        <div class="row">
+          <div class="col-md-4">
+            <input type="text" name="keyword" class="form-control"
+                   placeholder="搜索用户名、邮箱或姓名" th:value="${keyword}">
+          </div>
+          <div class="col-md-2">
+            <select name="size" class="form-select">
+              <option value="10" th:selected="${users.size == 10}">10条/页</option>
+              <option value="20" th:selected="${users.size == 20}">20条/页</option>
+              <option value="50" th:selected="${users.size == 50}">50条/页</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-outline-primary">搜索</button>
+          </div>
+        </div>
+        <input type="hidden" name="page" value="0">
+        <input type="hidden" name="sortBy" th:value="${sortBy}">
+        <input type="hidden" name="sortDir" th:value="${sortDir}">
+      </form>
+    </div>
+  </div>
+
+  <!-- 用户表格 -->
+  <div id="user-table">
+    <div th:replace="~{fragments/users :: user-table}"></div>
+  </div>
+</div>
+
+<th:block layout:fragment="scripts">
+  <script>
+    // 确认删除
+    document.body.addEventListener('htmx:confirm', function(evt) {
+      if (evt.detail.question === 'delete') {
+        evt.preventDefault();
+        if (confirm('确定要删除这个用户吗？')) {
+          evt.detail.issueRequest();
+        }
+      }
+    });
+  </script>
+</th:block>
+</html>
